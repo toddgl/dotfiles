@@ -1,0 +1,23 @@
+#!/bin/sh
+
+WALLPAPER="$(cat "$HOME/.cache/current_wallpaper" 2>/dev/null)"
+[ -f "$WALLPAPER" ] || exit 0
+
+# Requires ImageMagick
+BRIGHTNESS=$(magick "$WALLPAPER" -colorspace gray -resize 1x1 txt:- \
+  | awk -F '[(),]' '/gray/ {print int($4)}')
+
+# Convert brightness → opacity
+# dark image -> more opaque bar
+if [ "$BRIGHTNESS" -lt 80 ]; then
+  OPACITY="0.90"
+elif [ "$BRIGHTNESS" -lt 130 ]; then
+  OPACITY="0.85"
+else
+  OPACITY="0.75"
+fi
+
+mkdir -p ~/.config/waybar
+sed "s/^@define-color barOpacity.*/@define-color barOpacity rgba(0,0,0,$OPACITY);/" \
+  ~/.config/waybar/colors.css.in > ~/.config/waybar/colors.css
+

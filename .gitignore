@@ -1,0 +1,13 @@
+# Caches / generated
+.cache/
+.config/waybar/colors.css
+.config/wal/colors*
+.config/wal/sequences
+.config/wal/templates/*
+!/.config/wal/templates/.keep
+
+# Logs
+*.Logs
+
+# OS cruft
+.DS_Store

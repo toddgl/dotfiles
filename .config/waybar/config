@@ -1,0 +1,24 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+
+  "modules-left": ["sway/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": ["custom/ip", "custom/memory", "pulseaudio", "tray"],
+
+  "custom/ip": {
+    "exec": "~/.config/waybar/scripts/ip.sh",
+    "interval": 5
+  },
+
+  "custom/memory": {
+    "exec": "~/.config/waybar/scripts/mem.sh",
+    "interval": 3
+  },
+
+  "clock": {
+    "format": "󰃰 {:%Y-%m-%d %H:%M}"
+  }
+}
+

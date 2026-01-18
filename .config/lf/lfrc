@@ -1,0 +1,3 @@
+cmd setwall %{{ /home/glenn/.local/bin/setwall "$f"; lf -remote "send $id quit" }}
+map <enter> setwall
+map <esc> quit

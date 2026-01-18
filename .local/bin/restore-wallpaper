@@ -1,0 +1,11 @@
+#!/bin/sh
+
+STATE="$HOME/.cache/current_wallpaper"
+
+[ -f "$STATE" ] || exit 0
+
+WALLPAPER="$(cat "$STATE")"
+[ -f "$WALLPAPER" ] || exit 0
+
+pkill swaybg 2>/dev/null
+swaybg -i "$WALLPAPER" -m fill &

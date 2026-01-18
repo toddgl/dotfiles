@@ -1,0 +1,23 @@
+#!/bin/sh
+
+export PATH="/usr/local/bin:/usr/bin:/bin"
+
+WALLPAPER="$1"
+STATE="$HOME/.cache/current_wallpaper"
+
+# Save state
+mkdir -p "$HOME/.cache"
+echo "$WALLPAPER" > "$STATE"
+
+# Restart background cleanly
+pkill swaybg 2>/dev/null
+swaybg -i "$WALLPAPER" -m fill &
+
+# Generate colors
+wal -i "$WALLPAPER" -n
+~/.local/bin/wall-blur
+
+# Restart waybar
+pkill waybar
+~/.local/bin/wallbar-opacity
+waybar &
