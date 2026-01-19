@@ -6,13 +6,14 @@ WALLPAPER="$(cat "$HOME/.cache/current_wallpaper" 2>/dev/null)"
 BRIGHTNESS=$(magick "$WALLPAPER" -colorspace gray -resize 1x1 txt:- \
   | awk -F '[(),]' '/gray/ {print int($4)}')
 
-if [ "$BRIGHTNESS" -lt 80 ]; then
+if [ "$BRIGHTNESS" -lt 120 ]; then
   BLUR=14
-elif [ "$BRIGHTNESS" -lt 130 ]; then
-  BLUR=8
 else
-  BLUR=4
+  BLUR=6
 fi
+
+swaymsg blur_radius "$BLUR" >/dev/null
+
 
 swaymsg blur_radius "$BLUR" >/dev/null
 

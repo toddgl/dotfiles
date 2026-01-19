@@ -15,9 +15,10 @@ swaybg -i "$WALLPAPER" -m fill &
 
 # Generate colors
 wal -i "$WALLPAPER" -n
+~/.local/bin/wall-theme
+~/.local/bin/wallbar-opacity
 ~/.local/bin/wall-blur
 
 # Restart waybar
 pkill waybar
-~/.local/bin/wallbar-opacity
 waybar &

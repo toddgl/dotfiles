@@ -1,23 +1,24 @@
 #!/bin/sh
 
-WALLPAPER="$(cat "$HOME/.cache/current_wallpaper" 2>/dev/null)"
-[ -f "$WALLPAPER" ] || exit 0
+WAL="$HOME/.cache/wal/colors.json"
+[ -f "$WAL" ] || exit 0
 
-# Requires ImageMagick
-BRIGHTNESS=$(magick "$WALLPAPER" -colorspace gray -resize 1x1 txt:- \
-  | awk -F '[(),]' '/gray/ {print int($4)}')
+BG=$(jq -r '.special.background' "$WAL")
 
-# Convert brightness → opacity
-# dark image -> more opaque bar
-if [ "$BRIGHTNESS" -lt 80 ]; then
-  OPACITY="0.90"
-elif [ "$BRIGHTNESS" -lt 130 ]; then
+# Convert hex to RGB brightness
+R=$((16#${BG#\#0:2}))
+G=$((16#${BG#\#2:2}))
+B=$((16#${BG#\#4:2}))
+
+BRIGHTNESS=$(( (R*299 + G*587 + B*114) / 1000 ))
+
+if [ "$BRIGHTNESS" -lt 90 ]; then
+  OPACITY="0.92"
+elif [ "$BRIGHTNESS" -lt 140 ]; then
   OPACITY="0.85"
 else
   OPACITY="0.75"
 fi
 
-mkdir -p ~/.config/waybar
 sed "s/^@define-color barOpacity.*/@define-color barOpacity rgba(0,0,0,$OPACITY);/" \
   ~/.config/waybar/colors.css.in > ~/.config/waybar/colors.css
-

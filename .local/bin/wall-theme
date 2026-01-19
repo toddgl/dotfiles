@@ -1,0 +1,20 @@
+#!/bin/sh
+
+WAL="$HOME/.cache/wal/colors.json"
+[ -f "$WAL" ] || exit 0
+
+BG=$(jq -r '.special.background' "$WAL")
+
+R=$((16#${BG#\#0:2}))
+G=$((16#${BG#\#2:2}))
+B=$((16#${BG#\#4:2}))
+BRIGHTNESS=$(( (R*299 + G*587 + B*114) / 1000 ))
+
+STATE="$HOME/.cache/theme-mode"
+
+if [ "$BRIGHTNESS" -lt 120 ]; then
+  echo "dark" > "$STATE"
+else
+  echo "light" > "$STATE"
+fi
+

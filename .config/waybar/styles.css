@@ -23,13 +23,32 @@ window#waybar {
   background-color: @barOpacity;
 }
 
+#waybar {
+  color: @barText;
+}
+
+#tray widget {
+  margin: 0 6px;
+}
+
+#tray image {
+  padding: 4px;
+}
+
+#tray widget:hover {
+  background: rgba(255,255,255,0.1);
+  border-radius: 6px;
+}
+
 *:hover {
     border-radius: 5px;
     transition: background 0.3s;
 }
+
 .modules-left > widget:first-child > * {
     margin-left: 15px;
 }
+
 .modules-right > widget:last-child > * {
     margin-right: 15px;
 }
