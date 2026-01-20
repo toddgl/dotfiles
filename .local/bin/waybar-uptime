@@ -1,0 +1,4 @@
+#!/bin/sh
+
+UP=$(uptime | awk -F, '{print $1}' | sed 's/.*up //')
+echo "{\"text\":\"󰥔 $UP\",\"tooltip\":\"System uptime\"}"

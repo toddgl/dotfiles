@@ -1,0 +1,10 @@
+#!/bin/sh
+
+exec 2>/dev/null
+
+TOP=$(ps -axo comm,%mem -r | awk '
+NR==1 { next }
+NR<=6 { printf "%-16s %5s%%\\n", $1, $2 }
+')
+
+printf '{"text":"󰍛 MEM","tooltip":"%s"}\n' "$TOP"

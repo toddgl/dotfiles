@@ -6,25 +6,26 @@
 }
 
 window#waybar {
-  background: @background;
-  color: @foreground;
+  background-color: @barBg;
+  color: @barText;
 }
 
+/* Workspaces */
 #workspaces button {
-  color: @color7;
+  color: @barText;
+  padding: 0 10px;
+  margin: 2px 4px;
+  border-radius: 6px;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+#workspaces button:hover {
+  background: @barHover;
 }
 
 #workspaces button.focused {
-  background: @color2;
-  color: @background;
-}
-
-window#waybar {
-  background-color: @barOpacity;
-}
-
-#waybar {
-  color: @barText;
+  background: transparent;
+  box-shadow: inset 0 -3px 0 @barText;
 }
 
 #tray widget {
@@ -53,11 +54,21 @@ window#waybar {
     margin-right: 15px;
 }
 
+#custom-topmem {
+  padding: 0 10px;
+  color: @barText;
+}
+
+#custom-uptime {
+  padding: 0 10px;
+  color: @barText;
+}
+
 #custom-ip,
 #custom-memory,
 #clock,
 #pulseaudio {
   padding: 0 10px;
-  color: @color4;
+  color: @barText;
 }
 

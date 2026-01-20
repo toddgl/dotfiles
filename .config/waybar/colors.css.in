@@ -1,2 +1,4 @@
-@define-color barOpacity rgba(0,0,0,0.85);
-@define-color barText @foreground;
+@define-color barBg rgba(0,0,0,0.85);
+@define-color barText #ffffff;
+@define-color barFocus rgba(255,255,255,0.25);
+@define-color barHover rgba(255,255,255,0.15);

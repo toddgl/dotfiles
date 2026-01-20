@@ -5,20 +5,27 @@ WAL="$HOME/.cache/wal/colors.json"
 
 BG=$(jq -r '.special.background' "$WAL")
 
-# Convert hex to RGB brightness
+# Convert hex to RGB
 R=$((16#${BG#\#0:2}))
 G=$((16#${BG#\#2:2}))
 B=$((16#${BG#\#4:2}))
 
+# Perceived brightness
 BRIGHTNESS=$(( (R*299 + G*587 + B*114) / 1000 ))
 
 if [ "$BRIGHTNESS" -lt 90 ]; then
   OPACITY="0.92"
+  TEXT="#eeeeee"   # light text
 elif [ "$BRIGHTNESS" -lt 140 ]; then
   OPACITY="0.85"
+  TEXT="#dddddd"   # mid
 else
   OPACITY="0.75"
+  TEXT="#111111"   # dark text for light wallpapers
 fi
 
-sed "s/^@define-color barOpacity.*/@define-color barOpacity rgba(0,0,0,$OPACITY);/" \
+sed \
+  -e "s|^@define-color barOpacity.*|@define-color barOpacity rgba(0,0,0,$OPACITY);|" \
+  -e "s|^@define-color barText.*|@define-color barText $TEXT;|" \
   ~/.config/waybar/colors.css.in > ~/.config/waybar/colors.css
+

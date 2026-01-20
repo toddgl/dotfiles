@@ -1,0 +1,5 @@
+#!/bin/sh
+
+IP=$(ifconfig | awk '/inet / && $2 != "127.0.0.1" {print $2; exit}')
+echo "{\"text\":\"󰈀 $IP\",\"tooltip\":\"IP address\"}"
+

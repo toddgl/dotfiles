@@ -5,7 +5,7 @@
 
   "modules-left": ["sway/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["custom/ip", "custom/memory", "pulseaudio", "tray", "custom/conky"],
+  "modules-right": ["custom/ip", "custom/topmenu", "custom/uptime", "memory", "cpu", "custom/memory", "custom/conky", "tray"],
 
   "custom/ip": {
     "exec": "~/.config/waybar/scripts/ip.sh",
@@ -23,14 +23,42 @@
     "on-click": "~/.local/bin/toggle-conky"
    },
 
-"clock": {
-  "format": "󰃭 {:%a %d %b  %H:%M}",
-  "tooltip-format": "<tt><small>{calendar}</small></tt>",
-  "calendar": {
-    "mode": "month",
-    "mode-mon-col": 3,
-    "weeks-pos": "right",
-    "on-scroll": 1
+   "custom/ip": {
+    "exec": "~/.local/bin/waybar-ip",
+    "interval": 10,
+    "return-type": "json"
+   },
+
+   "custom/topmenu": {
+    "exec": "~/.local/bin/waybar-topmenu",
+    "interval": 10,
+    "return-type": "json"
+   },
+
+  "custom/uptime": {
+    "exec": "~/.local/bin/waybar-uptime",
+    "interval": 30,
+    "return-type": "json"
+   },
+   
+  "cpu": {
+    "format": "󰍛 {usage}%",
+    "tooltip": true
+  },
+
+  "memory": {
+    "format": "󰘚 {percentage}%",
+    "tooltip": true
+  },
+
+  "clock": {
+    "format": "󰃭 {:%a %d %b  %H:%M}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1
+   }
   }
-}
 }

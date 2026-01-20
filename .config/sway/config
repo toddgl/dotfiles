@@ -27,9 +27,9 @@ exec_always --no-startup-id ~/.local/bin/restore-wallpaper
 for_window [title=".*"] opacity 0.95
 for_window [app_id="walker"] floating enable, move position center
 for_window [app_id="keepassxc"] floating enable, move position center
-for_window [class="Conky"] floating enable
-for_window [class="Conky"] resize set width 210 height 200
-for_window [class="Conky"] move position 20 px 50 px
+for_window [class="conky"] floating enable
+for_window [class="conky"] resize set width 210 height 200
+for_window [class="conky"] move position 20 px 50 px
 
 
 ### Output configuration
@@ -246,6 +246,9 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
     bindsym Print exec grim
+    # Special keys tio restart waybar
+    bindsym $mod+Shift+b exec pkill waybar; waybar &
+
 
 
 
