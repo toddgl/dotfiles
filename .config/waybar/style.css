@@ -16,7 +16,7 @@ window#waybar {
   padding: 0 10px;
   margin: 2px 4px;
   border-radius: 6px;
-  transition: background-color 120ms ease, color 120ms ease;
+  transition: background-color 120ms ease;
 }
 
 #workspaces button:hover {
@@ -24,8 +24,9 @@ window#waybar {
 }
 
 #workspaces button.focused {
-  background: transparent;
-  box-shadow: inset 0 -3px 0 @barText;
+  background: @barFocus;
+  color: @barText;
+  font-weight: bold;
 }
 
 #tray widget {

@@ -23,6 +23,10 @@ exec_always --no-startup-id elephant
 # Retain wallpaper settings
 exec_always --no-startup-id ~/.local/bin/restore-wallpaper
 
+# Start common applications
+exec_always kitty --title Calcurse calcurse
+exec_always kitty --title Btop btop
+
 # Windon behavior
 for_window [title=".*"] opacity 0.95
 for_window [app_id="walker"] floating enable, move position center
@@ -30,7 +34,8 @@ for_window [app_id="keepassxc"] floating enable, move position center
 for_window [class="conky"] floating enable
 for_window [class="conky"] resize set width 210 height 200
 for_window [class="conky"] move position 20 px 50 px
-
+for_window [title="^Calcurse$"] floating enable, resize set 500 500, move position 1300 px 0 px
+for_window [title="^Btop$"]  floating enable, resize set 1000 1000, move position 0 px 0 px
 
 ### Output configuration
 #

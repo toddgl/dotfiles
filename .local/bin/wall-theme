@@ -3,8 +3,11 @@
 WAL="$HOME/.cache/wal/colors.json"
 [ -f "$WAL" ] || exit 0
 
+# --- Extract colors ---
 BG=$(jq -r '.special.background' "$WAL")
+ACCENT=$(jq -r '.colors.color4' "$WAL")
 
+# --- Brightness calculation ---
 R=$((16#${BG#\#0:2}))
 G=$((16#${BG#\#2:2}))
 B=$((16#${BG#\#4:2}))
@@ -12,9 +15,32 @@ BRIGHTNESS=$(( (R*299 + G*587 + B*114) / 1000 ))
 
 STATE="$HOME/.cache/theme-mode"
 
+# --- Defaults ---
+OPACITY="0.85"
+TEXT="#ffffff"
+FOCUS_ALPHA="33"
+HOVER_ALPHA="22"
+
+# --- Light / dark logic ---
 if [ "$BRIGHTNESS" -lt 120 ]; then
   echo "dark" > "$STATE"
+  OPACITY="0.92"
+  TEXT="#eeeeee"
+  FOCUS_ALPHA="55"
+  HOVER_ALPHA="33"
 else
   echo "light" > "$STATE"
+  OPACITY="0.75"
+  TEXT="#111111"
+  FOCUS_ALPHA="66"
+  HOVER_ALPHA="44"
 fi
+
+# --- Emit Waybar colors ---
+sed \
+  -e "s|^@define-color barBg.*|@define-color barBg rgba(0,0,0,$OPACITY);|" \
+  -e "s|^@define-color barText.*|@define-color barText $TEXT;|" \
+  -e "s|^@define-color barFocus.*|@define-color barFocus ${ACCENT}${FOCUS_ALPHA};|" \
+  -e "s|^@define-color barHover.*|@define-color barHover ${ACCENT}${HOVER_ALPHA};|" \
+  ~/.config/waybar/colors.css.in > ~/.config/waybar/colors.css
 
