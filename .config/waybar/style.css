@@ -2,7 +2,25 @@
 
 * {
   font-family: "JetBrainsMono Nerd Font";
-  font-size: 13px;
+  font-size: 14px;
+}
+
+/* Ensure notification headers and body text use the font */
+.notification-default,
+.notification-low,
+.notification-critical {
+  font-family: "JetBrainsMono Nerd Font";
+}
+
+/* Style the 'Control Center' title */
+.widget-title {
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 1.2rem;
+}
+
+/* Match the Waybar button style for any SwayNC buttons */
+button {
+  font-family: "JetBrainsMono Nerd Font";
 }
 
 window#waybar {
@@ -63,6 +81,14 @@ window#waybar {
 #custom-uptime {
   padding: 0 10px;
   color: @barText;
+}
+
+#custom-notification {
+    font-family: "JetBrainsMono Nerd Font";
+    padding: 0 10px;
+    font-size: 16px;
+    /* Optional: making the 'dot' red if you used the <sup> tag in the config */
+    color: #ffffff; 
 }
 
 #custom-ip,

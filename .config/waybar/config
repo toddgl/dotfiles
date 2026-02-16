@@ -5,11 +5,27 @@
 
   "modules-left": ["sway/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["custom/ip", "custom/topmenu", "custom/uptime", "memory", "cpu", "custom/memory", "custom/conky", "tray"],
+  "modules-right": ["custom/notification","custom/ip", "custom/topmenu", "custom/uptime", "memory", "cpu", "custom/memory", "custom/conky", "tray"],
 
-  "custom/ip": {
-    "exec": "~/.config/waybar/scripts/ip.sh",
-    "interval": 5
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+        "notification": "<span foreground='red'><sup></sup></span>",
+        "none": "",
+        "dnd-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-none": "",
+        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "inhibited-none": "",
+        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+        "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   },
 
   "custom/memory": {
