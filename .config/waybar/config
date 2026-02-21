@@ -5,20 +5,30 @@
 
   "modules-left": ["sway/workspaces"],
   "modules-center": ["clock"],
-  "modules-right": ["custom/notification","custom/ip", "custom/topmenu", "custom/uptime", "memory", "cpu", "custom/memory", "custom/conky", "tray"],
+  "modules-right": [
+    "custom/notification", 
+    "custom/ip", 
+    "custom/topmenu", 
+    "custom/uptime", 
+    "memory", 
+    "cpu", 
+    "custom/memory", 
+    "custom/conky", 
+    "tray"
+  ],
 
   "custom/notification": {
     "tooltip": false,
     "format": "{icon}",
     "format-icons": {
-        "notification": "<span foreground='red'><sup></sup></span>",
-        "none": "",
-        "dnd-notification": "<span foreground='red'><sup></sup></span>",
-        "dnd-none": "",
-        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-        "inhibited-none": "",
-        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-        "dnd-inhibited-none": ""
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
     },
     "return-type": "json",
     "exec-if": "which swaync-client",
@@ -26,6 +36,12 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
+  },
+
+  "custom/ip": {
+    "exec": "~/.local/bin/waybar-ip",
+    "interval": 10,
+    "return-type": "json"
   },
 
   "custom/memory": {
@@ -37,25 +53,19 @@
     "format": "󰔷",
     "tooltip": "Toggle system widget",
     "on-click": "~/.local/bin/toggle-conky"
-   },
+  },
 
-   "custom/ip": {
-    "exec": "~/.local/bin/waybar-ip",
-    "interval": 10,
-    "return-type": "json"
-   },
-
-   "custom/topmenu": {
+  "custom/topmenu": {
     "exec": "~/.local/bin/waybar-topmenu",
     "interval": 10,
     "return-type": "json"
-   },
+  },
 
   "custom/uptime": {
     "exec": "~/.local/bin/waybar-uptime",
     "interval": 30,
     "return-type": "json"
-   },
+  },
    
   "cpu": {
     "format": "󰍛 {usage}%",
@@ -75,6 +85,6 @@
       "mode-mon-col": 3,
       "weeks-pos": "right",
       "on-scroll": 1
-   }
+    }
   }
 }

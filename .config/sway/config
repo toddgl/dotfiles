@@ -98,9 +98,8 @@ shadows_on_csd enable
 
 
 # Resume logic
-exec_always "pkill swayidle; swayidle -w \
-    timeout 600 'swaymsg \"output * power off\"' \
-    resume 'swaymsg \"output * power on\"; pkill swaync; swaync & sleep 1; ~/.local/bin/refresh-apps.sh'"
+
+exec_always ~/.local/bin/idle-handler.sh
 
 ### Input configuration
 #
