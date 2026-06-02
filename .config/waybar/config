@@ -77,6 +77,11 @@
     "tooltip": true
   },
 
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+
   "clock": {
     "format": "󰃭 {:%a %d %b  %H:%M}",
     "tooltip-format": "<tt><small>{calendar}</small></tt>",

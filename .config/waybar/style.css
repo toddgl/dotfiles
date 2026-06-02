@@ -1,7 +1,7 @@
 @import url("file:///home/glenn/.cache/wal/colors-waybar.css");
 
 * {
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "BigBlueTermPlus Nerd Font Propo";
   font-size: 14px;
 }
 
@@ -9,18 +9,18 @@
 .notification-default,
 .notification-low,
 .notification-critical {
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "BigBlueTermPlus Nerd Font Propo";
 }
 
 /* Style the 'Control Center' title */
 .widget-title {
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "BigBlueTermPlus Nerd Font Propo";
   font-size: 1.2rem;
 }
 
 /* Match the Waybar button style for any SwayNC buttons */
 button {
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "BigBlueTermPlus Nerd Font Propo";
 }
 
 window#waybar {
@@ -84,7 +84,7 @@ window#waybar {
 }
 
 #custom-notification {
-    font-family: "JetBrainsMono Nerd Font";
+    font-family: "BigBlueTermPlus Nerd Font Propo";
     padding: 0 10px;
     font-size: 16px;
     /* Optional: making the 'dot' red if you used the <sup> tag in the config */

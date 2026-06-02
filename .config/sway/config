@@ -7,6 +7,12 @@
 set $path_cmd export PATH="$HOME/.local/bin:$PATH"
 exec_always $path_cmd
 
+# Export environment variables to D-Bus for the current session
+exec dbus-update-activation-environment --all
+
+# Start gnome-keyring-daemon and components manually
+exec eval $(/usr/local/bin/gnome-keyring-daemon --start --components=secrets,ssh,pkcs11)
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -21,13 +27,19 @@ set $term kitty
 # Your preferred application launcher
 set $menu walker-launcher || bemenu-run
 
-exec_always --no-startup-id elephant
+exec mako
+exec_always --no-startup-id env LD_STATIC_TLS_EXTRA=2048 elephant
 
 # Retain wallpaper settings
 exec_always --no-startup-id ~/.local/bin/restore-wallpaper
 
 # Optimized startup
 exec_always swaync
+
+# --- Added Delay for Tray Applications ---
+# Ensures Waybar's SNI watcher is active before apps launch
+exec sleep 3 && nextcloud --background
+exec sleep 3 && keepassxc
 
 # Start terminal apps on Workspace 1
 assign [title="^Calcurse$"] 1
@@ -274,14 +286,25 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
     bindsym Print exec grim
-    # Special keys to restart waybar
-    bindsym $mod+Shift+b exec pkill waybar; waybar &
+    # Restart Waybar and refresh tray applications
+    bindsym $mod+Shift+b exec ~/.local/bin/refresh-waybar
     # Special keys to open walker-launcher for buku searches
     bindsym $mod+Shift+z exec /usr/local/bin/walker-launcher 
     # Show swaync
     bindsym $mod+Shift+n exec swaync-client -t -sw
     # Take a screenshot with grimshot
-    bindsym Mod1+Control+s exec grimshot --notify save area /home/glenn/Pictures/Screenshots/screenshot-$(date + %Y-$m-$d_%H-%M-%S").png
+    bindsym Mod1+Control+s exec grimshot --notify save area /home/glenn/Pictures/Screenshots/screenshot-`date +%Y-%m-%d_%H-%M-%S`.png
+
+    # Define the keybinding for sway-cheatsheet with a specific app_id
+    bindsym $mod+question exec foot --app-id="sway-cheatsheet" --title="Sway Cheatsheet" -e /home/glenn/Documents/Bin/Tui/sway-cheatsheet/app.py
+
+    # Set window rules for that app_id
+    for_window [app_id="sway-cheatsheet"] {
+        floating enable
+        border normal 2px        # <-- This enables standard borders and the title bar
+        resize set 1000 px 600 px
+        move position center
+    }
 
 #
 # Status Bar:
